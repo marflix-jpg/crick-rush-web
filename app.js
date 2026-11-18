@@ -10,7 +10,7 @@
   const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
 
   /* ---------- Persisted state ---------- */
-  const KEY = "pitchside.v1";
+  const KEY = "crickrush.v1";
   const store = {
     load() {
       try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
