@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+  <title>Pitchside — Live Cricket Scores, Voting &amp; Rewards</title>
+  <meta name="description" content="Live cricket scores, pick the winner, and earn gift cards. Beautifully simple." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2330d158'/%3E%3Cpath d='M30 70 L70 30 M62 30 h8 v8' stroke='white' stroke-width='7' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <!-- Frosted navigation -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__brand" href="#top" aria-label="Pitchside home">
+        <span class="nav__mark" aria-hidden="true"></span>
+        Pitchside
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#live">Live</a>
+        <a href="#vote">Vote</a>
+        <a href="#rewards">Rewards</a>
+      </nav>
+      <div class="nav__wallet" id="walletChip" title="Your points">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16"><path d="M12 2l2.9 6.3L22 9.2l-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 7.1-.9z" fill="currentColor"/></svg>
+        <span id="walletPoints">0</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO: the live scorecard is the subject, so it leads -->
+    <section class="hero">
+      <div class="hero__head">
+        <span class="live-tag"><span class="live-tag__dot"></span>Live now</span>
+        <h1 class="hero__title">The match, the moment,<br />and a little something back.</h1>
+        <p class="hero__sub">Follow every ball in real time. Call the winner before stumps. Turn the right calls into real gift cards.</p>
+      </div>
+
+      <!-- Featured live match card -->
+      <article class="featured" id="featured" aria-label="Featured live match">
+        <div class="featured__top">
+          <span class="featured__series">ICC World Series · Final</span>
+          <span class="featured__status" id="featuredStatus">Live · 2nd Innings</span>
+        </div>
+
+        <div class="featured__teams">
+          <div class="team team--batting" id="teamA">
+            <div class="team__id">
+              <span class="team__flag" data-code="IND">🇮🇳</span>
+              <span class="team__name">India</span>
+            </div>
+            <div class="team__score">
+              <span class="team__runs" id="scoreA">182</span><span class="team__wk">/4</span>
+              <span class="team__overs" id="oversA">18.2 ov</span>
+            </div>
+          </div>
+
+          <div class="featured__vs" aria-hidden="true">
+            <span class="featured__chase" id="chaseLine">Need 14 off 10</span>
+          </div>
+
+          <div class="team" id="teamB">
+            <div class="team__id">
+              <span class="team__flag" data-code="AUS">🇦🇺</span>
+              <span class="team__name">Australia</span>
+            </div>
+            <div class="team__score">
+              <span class="team__runs">195</span><span class="team__wk">/8</span>
+              <span class="team__overs">20.0 ov</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="featured__ball" id="ballStrip" aria-label="This over">
+          <span class="over-label">This over</span>
+          <div class="over-balls" id="overBalls"></div>
+        </div>
+
+        <div class="featured__foot">
+          <span id="commentary" class="commentary">Sharma drives through the covers — four more.</span>
+          <a href="#vote" class="btn btn--small">Pick the winner</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- LIVE: all matches -->
+    <section class="section" id="live">
+      <header class="section__head">
+        <h2 class="section__title">Today, ball by ball</h2>
+        <p class="section__desc">Every live and upcoming fixture in one quiet, glanceable place.</p>
+      </header>
+      <div class="matches" id="matchGrid"></div>
+    </section>
+
+    <!-- VOTE -->
+    <section class="section section--vote" id="vote">
+      <header class="section__head">
+        <h2 class="section__title">Back your read of the game.</h2>
+        <p class="section__desc">One vote per match. Lock it before the final over and earn 50 points the moment your team wins.</p>
+      </header>
+      <div class="vote" id="voteCard"></div>
+    </section>
+
+    <!-- REWARDS -->
+    <section class="section section--rewards" id="rewards">
+      <header class="section__head">
+        <h2 class="section__title">Good calls, real rewards.</h2>
+        <p class="section__desc">Spend the points you earn on gift cards and match-day coupons. No catch.</p>
+      </header>
+      <div class="rewards" id="rewardGrid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="nav__brand"><span class="nav__mark" aria-hidden="true"></span>Pitchside</span>
+      <p class="footer__note">Scores and rewards shown are a live demo. Play responsibly — predictions are for fun, not wagering.</p>
+      <span class="footer__copy">© 2026 Pitchside</span>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
